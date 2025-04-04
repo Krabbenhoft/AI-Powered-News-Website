@@ -119,5 +119,6 @@ fi
 
 git add .
 git commit -m "update for today's news"
-git push
-Krabbenhoft
+PAT=$(< gitkey.txt)
+echo $PAT
+git push https://Krabbenhoft:$PAT@github.com/Krabbenhoft/news.git main
