@@ -45,3 +45,7 @@ git commit -m "update for today's news"
 PAT=$(< gitkey.txt)
 echo $PAT
 git push https://Krabbenhoft:$PAT@github.com/Krabbenhoft/news.git main
+
+#Post to tumbler
+
+./social.py "Check out today's news at https://news-kohl-tau.vercel.app/! Just updated!"

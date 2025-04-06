@@ -27,10 +27,15 @@
         document.body.innerHTML += "<br>"
     }
 
+    //Make a place for the image
+    document.body.innerHTML += "<div id='mainimage'></div>"
+
+
     //Fetch image based off of the text of the text of the current day's news
+    //Also add the text
     getText(recentDatesURLS[0]).then(
-        textReturned => console.log(textReturned.substring(200, 400),
-        getImage(textReturned.substring(200, 400)).then(urlReturned => document.body.innerHTML += `<img width="75%" style="margin:auto; display:block;" src=${urlReturned}>`),   
+        textReturned => console.log(textReturned.substring(400, 500),
+        getImage(textReturned.substring(400, 500)).then(urlReturned => document.getElementById('mainimage').innerHTML += `<img width="75%" style="margin:auto; display:block;" src=${urlReturned}>`),   
         getText(recentDatesURLS[0]).then(textReturned => document.body.innerHTML += textReturned)
     ))
 
