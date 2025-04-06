@@ -60,5 +60,5 @@ response = client.models.generate_content(
     model="gemini-2.0-flash", contents=aiPrompt
 )
 print(response.text)
-indexFile.writelines(str(response.text))
+indexFile.writelines(str(response.text)[9:len(str(response.text))-24])
 print(datetime.date.today())

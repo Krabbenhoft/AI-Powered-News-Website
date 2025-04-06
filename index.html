@@ -1,18 +1,62 @@
 <!DOCTYPE html>
 <body>
-
+<h1>Recent News Events</h1>
 </body>
 <script>
     //Dates from convorsating w/ ai Grok
     var baseTodayDate = new Date()
     var recentDates = []
-    var currentURL = window.location.hostname;
+    var recentDatesURLS = []
+    var currentURL = window.location.href;
     for(i = 0; i < 14; i++) {
         var currentDate = new Date(baseTodayDate)
         currentDate.setDate(baseTodayDate.getDate() - i)
         recentDates[i] = currentDate.toISOString().substring(0,10)
     }
 
-    document.body.innerHTML += currentURL
-    document.body.innerHTML += recentDates; 
+    for(i = 0; i < recentDates.length; i++) {
+        recentDatesURLS[i] = currentURL.replace("index", recentDates[i])
+    }
+
+    for(i = 0; i < recentDatesURLS.length; i++) {
+        var currentLink = document.createElement('a')
+        currentLink.href = recentDatesURLS[i];
+        currentLink.innerHTML = recentDates[i];
+        currentLink.style.fontSize = "2em"
+        document.body.appendChild(currentLink)
+        document.body.innerHTML += "<br>"
+    }
+
+    //Fetch image based off of the text of the text of the current day's news
+    getText(recentDatesURLS[0]).then(
+        textReturned => console.log(textReturned.substring(200, 400),
+        getImage(textReturned.substring(200, 400)).then(urlReturned => document.body.innerHTML += `<img width="75%" style="margin:auto; display:block;" src=${urlReturned}>`),   
+    ))
+
+    //Get text from convorsation w/ Grok ai
+    async function getText(urlToGet) {
+        var returnedData = await fetch(urlToGet)
+        var textToReturn = await returnedData.text()
+        return textToReturn
+    }
+
+    getText(recentDatesURLS[0]).then(textReturned => document.body.innerHTML += textReturned)
+
+    //Geting image from Grok ai conversation- pretty directly taken
+    async function getImage(searchTerm) {
+        //Get the data
+        var dataReturned = await fetch(`https://api.pexels.com/v1/search?query=${searchTerm}&per_page=1`,
+        {
+            headers: { Authorization: 'Z3NaCyYxvnWCmwwBJjzrInm9MgsqANJ96kOPEzrAcjWF4uw6WboFpLTo'}
+        });
+
+        //Parse it 
+        var parsedData = await dataReturned.json();
+
+        //Get the url of the first image
+        return parsedData.photos[0].src.original;
+    }
+
+
+    
 </script>
