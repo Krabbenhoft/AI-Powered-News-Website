@@ -30,8 +30,8 @@ echo "Step 1: Fetching $FETCH_DESCRIPTION..."
 search_results_text=$(lynx -dump -listonly -nonumbers -useragent="$USER_AGENT" "$SOURCE_URL" 2>/dev/null)
 
 if [ -z "$search_results_text" ]; then
-  echo "Error: Failed to fetch initial links from $SOURCE_URL or no links found."
-  exit 1
+	echo "Error: Failed to fetch initial links from $SOURCE_URL or no links found."
+	exit 1
 fi
 
 # Corrected mapfile command:
@@ -51,40 +51,45 @@ echo "Step 2: Fetching content for each URL..."
 
 # Check if the array is empty before looping
 if [ ${#sitesReturned[@]} -eq 0 ]; then
-  echo "No URLs found to process after filtering."
+	echo "No URLs found to process after filtering."
 else
-  for url in "${sitesReturned[@]}"; do
-      # Define the output filename
-      output_file="textinput/file${count}.txt"
+	for url in "${sitesReturned[@]}"; do
+			# Define the output filename
+			output_file="textinput/file${count}.txt"
 
-      echo "  Fetching (${count}/${#sitesReturned[@]}): $url  -->  $output_file"
+			echo "	Fetching (${count}/${#sitesReturned[@]}): $url	-->	$output_file"
 
-      # Use lynx -dump for the specific URL
-      # Redirect stderr to /dev/null to suppress connection errors shown on the terminal
-      # Check the exit status of lynx
-      if lynx -dump -useragent="$USER_AGENT" "$url" >> $output_file 2>/dev/null; then
-          # Check if the created file is empty (could indicate redirect issue or empty page)
-          if [ ! -s "$output_file" ]; then
-              echo "  Warning: Fetched URL '$url' but '$output_file' is empty. It might be a redirect or blank page."
-              # Optional: remove empty file
-              rm -f "$output_file" # Remove empty file to avoid confusion
-          else
-              echo "  Successfully created $output_file"
-              ((processed_count++))
-          fi
-      else
-          fetch_exit_status=$?
-          echo "  Warning: Failed to fetch content from $url (Exit Status: $fetch_exit_status). Skipping."
-          # Optional: remove potentially partially created file on error
-          rm -f "$output_file"
+			# Use lynx -dump for the specific URL
+			# Redirect stderr to /dev/null to suppress connection errors shown on the terminal
+			# Check the exit status of lynx
+			if lynx -dump -useragent="$USER_AGENT" "$url" >> $output_file 2>/dev/null; then
+					# Check if the created file is empty (could indicate redirect issue or empty page)
+					if [ ! -s "$output_file" ]; then
+							echo "	Warning: Fetched URL '$url' but '$output_file' is empty. It might be a redirect or blank page."
+							# Optional: remove empty file
+							rm -f "$output_file" # Remove empty file to avoid confusion
+					else
+							echo "	Successfully created $output_file"
+							((processed_count++))
+					fi
+			else
+					fetch_exit_status=$?
+					echo "	Warning: Failed to fetch content from $url (Exit Status: $fetch_exit_status). Skipping."
+					# Optional: remove potentially partially created file on error
+					rm -f "$output_file"
+			fi
+
+			# Increment the counter for the next file name
+			((count++))
+ 
+      if (( $count == 5));
+      then
+        break
       fi
 
-      # Increment the counter for the next file name
-      ((count++))
-
-      # Optional: Add a small delay to be polite to servers
-      # sleep 1
-  done
+			# Optional: Add a small delay to be polite to servers
+			# sleep 1
+	done
 fi
 
 echo ""
@@ -93,7 +98,7 @@ echo "Attempted to process ${#sitesReturned[@]} URLs."
 echo "Successfully created $processed_count files."
 # Adjust count for loop iteration if files were created
 if (( processed_count > 0 )); then
-  echo "Created files are named like: file1, file2, ..."
+	echo "Created files are named like: file1, file2, ..."
 fi
 
 

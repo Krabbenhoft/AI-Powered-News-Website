@@ -11,7 +11,7 @@ indexFile = open("index.html", mode="w")
 clientKey = keyFile.readlines()[0]
 client = genai.Client(api_key=clientKey)
 
-dataLines = open("textinput/file1").read() + open("textinput/file2").read() + open("textinput/file3").read() + open("textinput/file4").read() + open("textinput/file5").read()
+dataLines = open("textinput/file2.txt").read() + open("textinput/file3.txt").read() + open("textinput/file4.txt").read() + open("textinput/file5.txt").read()
 
 print(dataLines)
 
