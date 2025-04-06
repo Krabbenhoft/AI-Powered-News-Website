@@ -33,8 +33,8 @@ returnedCounter=0
 
 #download every URL
 for current_url in "${modifiedResults[@]}"; do
-  echo "Currently scraping: $current_url"
-  lynx -dump "$current_url" >> "textinput/file${returnedCounter}.txt"
+  echo "Currently scraping: $current_url to file textinput/file${returnedCounter}.txt"
+  timeout 10s lynx -dump --read_timeout=10 --connect_timeout=10 "$current_url" >> "textinput/file${returnedCounter}.txt"
   ((returnedCounter++))
 done
 
