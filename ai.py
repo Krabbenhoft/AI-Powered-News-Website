@@ -7,7 +7,6 @@ def getTextFromFiles():
 
 #Basic settup of files
 keyFile = open("aikey.txt")
-dataFile = open("allnews.txt", errors='ignore')
 indexFile = open("index.html", mode="w")
 clientKey = keyFile.readlines()[0]
 client = genai.Client(api_key=clientKey)
