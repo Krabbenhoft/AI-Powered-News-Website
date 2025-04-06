@@ -73,14 +73,14 @@ if [ ${#sitesReturned[@]} -eq 0 ]; then
 else
   for url in "${sitesReturned[@]}"; do
       # Define the output filename
-      output_file="file${count}"
+      output_file="textinput/file${count}.txt"
 
       echo "  Fetching (${count}/${#sitesReturned[@]}): $url  -->  $output_file"
 
       # Use lynx -dump for the specific URL
       # Redirect stderr to /dev/null to suppress connection errors shown on the terminal
       # Check the exit status of lynx
-      if lynx -dump -useragent="$USER_AGENT" "$url" >> "allnews.txt" 2>/dev/null; then
+      if lynx -dump -useragent="$USER_AGENT" "$url" >> $output_file 2>/dev/null; then
           # Check if the created file is empty (could indicate redirect issue or empty page)
           if [ ! -s "$output_file" ]; then
               echo "  Warning: Fetched URL '$url' but '$output_file' is empty. It might be a redirect or blank page."
