@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<body>
+
+</body>
+<script>
+    var today = new Date().toISOString().substring(0,10)
+    var recentDates = [today]
+    for(i = 1; i < 15; i++) {
+        recentDates[i] = "this"
+    }
+
+    document.body.innerHTML += today; 
+    document.body.innerHTML += recentDates; 
+
+</script>
