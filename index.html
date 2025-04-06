@@ -13,6 +13,6 @@
         recentDates[i] = currentDate.toISOString().substring(0,10)
     }
 
-
+    document.body.inert += currentURL
     document.body.innerHTML += recentDates; 
 </script>
