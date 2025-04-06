@@ -34,13 +34,6 @@ if [ -z "$search_results_text" ]; then
   exit 1
 fi
 
-# Optional Debugging: Show raw links fetched
-# echo "--- Raw Links Found ---"
-# echo "$search_results_text"
-# echo "--- End Raw Links ---"
-# echo ""
-
-
 # Corrected mapfile command:
 # 1. Removed '$' from sitesReturned
 # 2. Moved 'echo ""' which was causing the error (it's not needed here anyway)
@@ -50,17 +43,6 @@ mapfile -t sitesReturned < <(echo "$search_results_text" | awk '/^[[:space:]]*ht
 
 echo ""
 echo "Found ${#sitesReturned[@]} unique relevant URLs."
-
-# Optional Debugging: Show filtered URLs
-# echo "--- Filtered URLs ---"
-# if [ ${#sitesReturned[@]} -gt 0 ]; then
-#   printf "%s\n" "${sitesReturned[@]}"
-# else
-#   echo "No URLs after filtering."
-# fi
-# echo "--- End Filtered URLs ---"
-# echo ""
-
 
 # --- Step 2: Fetch Content for Each Filtered URL ---
 count=1
