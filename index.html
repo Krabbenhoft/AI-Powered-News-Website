@@ -33,10 +33,12 @@
 
     //Fetch image based off of the text of the text of the current day's news
     //Also add the text
+    getText(recentDatesURLS[0]).then(textReturned => document.body.innerHTML += textReturned)
+
+
     getText(recentDatesURLS[0]).then(
         textReturned => console.log(textReturned.substring(400, 500),
         getImage(textReturned.substring(400, 500)).then(urlReturned => document.getElementById('mainimage').innerHTML += `<img width="75%" style="margin:auto; display:block;" src=${urlReturned}>`),   
-        getText(recentDatesURLS[0]).then(textReturned => document.body.innerHTML += textReturned)
     ))
 
     //Get text from convorsation w/ Grok ai
