@@ -4,7 +4,7 @@ rm -r textinput
 mkdir textinput
 
 #read in results into an an array split_results
-search_results=$(lynx -dump -listonly -nonumbers "https://www.google.com/search?q=stock_market_news_today")
+search_results=$(lynx -dump -listonly -nonumbers "https://www.google.com/search?q=stock_market_news_today%20-site:nasdaq.com")
 split_results=(${search_results// /})
 
 #read the reults with propor parsing

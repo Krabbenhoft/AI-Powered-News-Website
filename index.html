@@ -31,6 +31,7 @@
     getText(recentDatesURLS[0]).then(
         textReturned => console.log(textReturned.substring(200, 400),
         getImage(textReturned.substring(200, 400)).then(urlReturned => document.body.innerHTML += `<img width="75%" style="margin:auto; display:block;" src=${urlReturned}>`),   
+        getText(recentDatesURLS[0]).then(textReturned => document.body.innerHTML += textReturned)
     ))
 
     //Get text from convorsation w/ Grok ai
@@ -39,8 +40,6 @@
         var textToReturn = await returnedData.text()
         return textToReturn
     }
-
-    getText(recentDatesURLS[0]).then(textReturned => document.body.innerHTML += textReturned)
 
     //Geting image from Grok ai conversation- pretty directly taken
     async function getImage(searchTerm) {
@@ -57,6 +56,4 @@
         return parsedData.photos[0].src.original;
     }
 
-
-    
 </script>
