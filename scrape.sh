@@ -76,7 +76,6 @@ else
 					fetch_exit_status=$?
 					echo "	Warning: Failed to fetch content from $url (Exit Status: $fetch_exit_status). Skipping."
 					# Optional: remove potentially partially created file on error
-					rm -f "$output_file"
 			fi
 
 			# Increment the counter for the next file name
