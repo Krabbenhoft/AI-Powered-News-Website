@@ -82,7 +82,7 @@ else
 			# Increment the counter for the next file name
 			((count++))
  
-      if (( $count == 5));
+      if (( $count == 50));
       then
         break
       fi
