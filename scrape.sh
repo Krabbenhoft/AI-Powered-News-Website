@@ -5,19 +5,11 @@ SEARCH_QUERY="stock market today"
 # Simple URL encoding for spaces (sufficient for this query)
 ENCODED_QUERY=$(echo "$SEARCH_QUERY" | sed 's/ /+/g')
 
-# --- IMPORTANT: CHOOSE YOUR SOURCE ---
-# Option 1: Scrape links directly from a specific site (like the original script did)
-SOURCE_URL="https://www.npr.org" # Using HTTPS now
-FETCH_DESCRIPTION="links from $SOURCE_URL"
+#Option 2: Actually perform a Google Search (UNCOMMENT the lines below to use this)
+GOOGLE_SEARCH_URL="https://www.google.com/search?q=${ENCODED_QUERY}&hl=en" # Use hl=en for English results
+SOURCE_URL="$GOOGLE_SEARCH_URL"
+FETCH_DESCRIPTION="Google search results for '$SEARCH_QUERY'"
 
-# Option 2: Actually perform a Google Search (UNCOMMENT the lines below to use this)
-# GOOGLE_SEARCH_URL="https://www.google.com/search?q=${ENCODED_QUERY}&hl=en" # Use hl=en for English results
-# SOURCE_URL="$GOOGLE_SEARCH_URL"
-# FETCH_DESCRIPTION="Google search results for '$SEARCH_QUERY'"
-# --- End Source Choice ---
-
-
-USER_AGENT="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" # Be a polite bot
 
 echo "Step 1: Fetching $FETCH_DESCRIPTION..."
 
@@ -27,7 +19,7 @@ echo "Step 1: Fetching $FETCH_DESCRIPTION..."
 # Pipe through awk to format and filter URLs properly.
 # The awk script looks for lines starting with http/https and excludes google.com domains.
 # Added error handling for the initial lynx fetch
-search_results_text=$(lynx -dump -listonly -nonumbers -useragent="$USER_AGENT" "$SOURCE_URL" 2>/dev/null)
+search_results_text=$(lynx -dump -listonly -nonumbers "$SOURCE_URL" 2>/dev/null)
 
 if [ -z "$search_results_text" ]; then
 	echo "Error: Failed to fetch initial links from $SOURCE_URL or no links found."
@@ -62,7 +54,7 @@ else
 			# Use lynx -dump for the specific URL
 			# Redirect stderr to /dev/null to suppress connection errors shown on the terminal
 			# Check the exit status of lynx
-			if lynx -dump -useragent="$USER_AGENT" "$url" >> $output_file 2>/dev/null; then
+			if lynx -dump "$url" >> $output_file 2>/dev/null; then
 					# Check if the created file is empty (could indicate redirect issue or empty page)
 					if [ ! -s "$output_file" ]; then
 							echo "	Warning: Fetched URL '$url' but '$output_file' is empty. It might be a redirect or blank page."
@@ -85,9 +77,6 @@ else
       then
         break
       fi
-
-			# Optional: Add a small delay to be polite to servers
-			# sleep 1
 	done
 fi
 
@@ -100,9 +89,8 @@ if (( processed_count > 0 )); then
 	echo "Created files are named like: file1, file2, ..."
 fi
 
-
+#Generate and push the text after ai interpolation
 ./ai.py
-
 git add .
 git commit -m "update for today's news"
 PAT=$(< gitkey.txt)
