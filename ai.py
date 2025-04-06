@@ -4,6 +4,7 @@ from google import genai
 import os.path
 import codecs
 import re
+import datetime
 
 def checkUTF(fileName):
     try:
@@ -42,7 +43,7 @@ def cleanTextFromFiles(inputText):
 
 #Basic settup of files
 keyFile = open("aikey.txt")
-indexFile = open("index.html", mode="w")
+indexFile = open(str(datetime.date.today()) + ".html", mode="w")
 clientKey = keyFile.readlines()[0]
 client = genai.Client(api_key=clientKey)
 
@@ -60,3 +61,4 @@ response = client.models.generate_content(
 )
 print(response.text)
 indexFile.writelines(str(response.text))
+print(datetime.date.today())
