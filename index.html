@@ -3,13 +3,16 @@
 
 </body>
 <script>
-    var today = new Date().toISOString().substring(0,10)
-    var recentDates = [today]
-    for(i = 1; i < 15; i++) {
-        recentDates[i] = "this"
+    //Dates from convorsating w/ ai Grok
+    var baseTodayDate = new Date()
+    var recentDates = []
+    var currentURL = window.location.hostname;
+    for(i = 0; i < 14; i++) {
+        var currentDate = new Date(baseTodayDate)
+        currentDate.setDate(baseTodayDate.getDate() - i)
+        recentDates[i] = currentDate.toISOString().substring(0,10)
     }
 
-    document.body.innerHTML += today; 
-    document.body.innerHTML += recentDates; 
 
+    document.body.innerHTML += recentDates; 
 </script>
