@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <body>
 <h1>Recent News Events</h1>
-<a src="https://www.tumblr.com/textdata">Follow on Tumblr to not miss anything!</a>
+<a href="https://www.tumblr.com/textdata">Follow on Tumblr to not miss anything!</a>
 <br>
 </body>
 <script>
@@ -17,7 +17,7 @@
     }
 
     for(i = 0; i < recentDates.length; i++) {
-        recentDatesURLS[i] = currentURL.replace("index", recentDates[i])
+        recentDatesURLS[i] = currentURL + "/" + recentDates[i] + ".html"
     }
 
     for(i = 0; i < recentDatesURLS.length; i++) {

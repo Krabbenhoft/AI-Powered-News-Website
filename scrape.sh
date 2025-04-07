@@ -47,7 +47,7 @@ echo $PAT
 git push https://Krabbenhoft:$PAT@github.com/Krabbenhoft/news.git main
 
 #Post to tumbler
-currDay=$(day +"%Y-%m-%d")
+currDay=$(date +"%Y-%m-%d")
 echo "day is $currDay"
 expectStringLocation="${currDay}.html"
 echo $expectStringLocation
