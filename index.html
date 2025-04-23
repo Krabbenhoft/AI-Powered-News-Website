@@ -43,9 +43,10 @@
     //Also add the text
     getText(recentDatesURLS[0]).then(textReturned => document.body.innerHTML += textReturned)
 
+    const regexFetcher = new RegExp("<h1>.*</h1>")
 
     getText(recentDatesURLS[0]).then(
-        textReturned => console.log(textReturned.substring(400, 500),
+        textReturned => console.log(textReturned.substring(400, 500), console.log(textReturned.get)
         getImage(textReturned.substring(400, 500)).then(urlReturned => document.getElementById('mainimage').innerHTML += `<img width="75%" style="margin:auto; display:block;" src=${urlReturned}>`),   
     ))
 

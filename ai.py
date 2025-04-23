@@ -56,7 +56,7 @@ print(dataLines)
 aiPrompt = """Output a summary of recent news using this context. It should be a very verbose summary of the news
 that explains all of the important things happening. Don't include random 'interest' pieces, but only the important
 stuff. Include historical background if nessesary to make a very important but brief news item longer.
-Format using HTML tags, but do not offset output with ` (backtick): """ +dataLines
+Format using HTML tags. Make sure the first h1 element contains a meaningfull description of the day's news. """ +dataLines
 response = client.models.generate_content(
     model="gemini-2.0-flash", contents=aiPrompt
 )
