@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import pytumblr
 import sys
+from bs4 import BeautifulSoup
 
 #simplified version of ai made script
 basic_public = open("basic_public.txt").read().strip()
@@ -19,10 +20,12 @@ client = pytumblr.TumblrRestClient(
 
 print("Making post")
 
+inputString = BeautifulSoup(sys.argv[1], "html.parser")
+mainHeader = inputString.find_all("h1")[0]
 response = client.create_text(
     blog_name,
     state="published",
-    body= sys.argv[1]
+    body= "Check out today's news at <a href=\"https://news-kohl-tau.vercel.app/\">Ai News App</a>! Just updated! Here is a snippet of what to expect:" + str(mainHeader)
 )
 
 if response:

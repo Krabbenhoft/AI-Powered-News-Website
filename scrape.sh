@@ -52,6 +52,5 @@ echo "day is $currDay"
 expectStringLocation="${currDay}.html"
 echo $expectStringLocation
 textGotten=$(< $expectStringLocation)
-someText=${textGotten:400:500}
-echo $someText
-./social.py "Check out today's news at https://news-kohl-tau.vercel.app/! Just updated! Here is a snippet of what to expect: $someText"
+echo $textGotten
+./social.py "$textGotten"

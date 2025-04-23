@@ -15,6 +15,7 @@ def checkUTF(fileName):
     except:
         return False
 
+#this breaks once you get to an invalid file
 def getTextFromFiles():
     outputString = ""
     badSite = ""
