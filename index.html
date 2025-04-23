@@ -46,7 +46,7 @@
     const regexFetcher = new RegExp("<h1>.*</h1>")
 
     getText(recentDatesURLS[0]).then(
-        textReturned => console.log(textReturned.substring(400, 500), console.log(regexFetcher.match(textReturned)),
+        textReturned => console.log(textReturned.substring(400, 500), console.log(textReturned.match(regexFetcher)),
         getImage(textReturned.substring(400, 500)).then(urlReturned => document.getElementById('mainimage').innerHTML += `<img width="75%" style="margin:auto; display:block;" src=${urlReturned}>`),   
     ))
 
