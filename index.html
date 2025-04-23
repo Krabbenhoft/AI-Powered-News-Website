@@ -32,7 +32,9 @@
         currentLink.innerHTML = recentDates[i];
         currentLink.style.fontSize = "2em"
         document.body.appendChild(currentLink)
-        document.body.innerHTML += "<br>"
+        if(i % 7 == 0){
+            document.body.innerHTML += "<br>"
+        }
     }
 
     //Make a place for the image
