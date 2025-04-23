@@ -32,7 +32,7 @@
         currentLink.innerHTML = recentDates[i];
         currentLink.style.fontSize = "2em"
         document.body.appendChild(currentLink)
-        if(i % 7 == 0){
+        if((i+1) % 7 == 0){
             document.body.innerHTML += "<br>"
         }
     }
