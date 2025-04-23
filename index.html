@@ -45,9 +45,10 @@
 
     const regexFetcher = new RegExp("<h1>.*</h1>")
 
+    //Use regex to parse the first header out of the file
     getText(recentDatesURLS[0]).then(
         textReturned => console.log(textReturned.substring(400, 500), console.log(textReturned.match(regexFetcher)[0].replace("<h1>", "").replace("</h1>", "")),
-        getImage(textReturned.match(regexFetcher)[0].replace("<h1>", "").replace("</h1>", "")).then(urlReturned => document.getElementById('mainimage').innerHTML += `<img width="75%" style="margin:auto; display:block;" src=${urlReturned}>`),   
+        getImage(textReturned.match(regexFetcher)[0].replace("<h1>", "").replace("</h1>", "")).then(urlReturned => document.getElementById('mainimage').innerHTML += `<img style="height:50vw; margin:auto; display:block;" src=${urlReturned}>`),   
     ))
 
     //Get text from convorsation w/ Grok ai
