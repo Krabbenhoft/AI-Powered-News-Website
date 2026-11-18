@@ -9,8 +9,6 @@
 <br>
 
 <br>
-<br>
-<br>
 
 
 I developed an AI-powered news website MVP in three days. I used BeautifulSoup for parsing and Pexels API for relevant images. I implemented Continuous Delivery (CI/CD) using GitHub and Vercel for agile deployment. It pushes daily headlines to social platforms automatically using official API wrappers.
