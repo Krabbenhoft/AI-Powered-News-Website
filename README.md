@@ -1,7 +1,12 @@
 # AI Powered News Website
 
+<figure>
 <img width="1365" height="785" alt="image" src="https://github.com/user-attachments/assets/51755f09-37b6-4e88-be2e-031001e5f886" />
-## Fig 1. AI Powered News Website Architecture Diagram.
+    <figcaption>
+    <em>Fig 1. AI Powered News Website Architecture Diagram.</em>
+  </figcaption>
+</figure>
+
 
 I developed an AI-powered news website MVP in three days. I used BeautifulSoup for parsing and Pexels API for relevant images. I implemented Continuous Delivery (CI/CD) using GitHub and Vercel for agile deployment. It pushes daily headlines to social platforms automatically using official API wrappers.
 
